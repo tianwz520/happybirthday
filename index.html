@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>🎂 生日快乐，渊！ 🎂</title>
   <style>
-    /* 全局重置 & 字体 */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -21,10 +21,10 @@
       justify-content: center;
       overflow-x: hidden;
       position: relative;
-      padding: 1.5rem;
+      padding: 1rem;
     }
 
-    /* 飘浮的爱心 / 星星背景 */
+    /* 飘浮爱心 — 移动端精简 */
     .floating-hearts {
       position: fixed;
       top: 0;
@@ -38,175 +38,121 @@
 
     .heart {
       position: absolute;
-      color: rgba(255, 200, 220, 0.75);
-      font-size: 1.6rem;
+      color: rgba(255, 200, 220, 0.7);
+      font-size: 1.2rem;
       user-select: none;
-      animation: floatUp 8s infinite ease-in-out;
-      filter: drop-shadow(0 0 6px rgba(255, 120, 160, 0.7));
+      animation: floatUp 10s infinite ease-in-out;
+      will-change: transform, opacity;
     }
 
     @keyframes floatUp {
-      0% {
-        transform: translateY(0) rotate(0deg) scale(1);
-        opacity: 0.6;
-      }
-      50% {
-        transform: translateY(-40vh) rotate(20deg) scale(1.2);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-90vh) rotate(-15deg) scale(0.9);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+      50% { transform: translateY(-30vh) rotate(15deg); opacity: 0.9; }
+      100% { transform: translateY(-80vh) rotate(-10deg); opacity: 0; }
     }
 
-    /* 主卡片 — 毛玻璃梦幻效果 */
+    /* 主卡片 — 移除毛玻璃，改用半透明背景提升性能 */
     .birthday-card {
       position: relative;
       z-index: 10;
       width: 100%;
-      max-width: 700px;
-      background: rgba(255, 255, 255, 0.09);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 2px solid rgba(255, 220, 240, 0.3);
-      border-radius: 60px 60px 50px 50px;
-      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255, 190, 220, 0.2) inset;
-      padding: 2.5rem 2rem 2rem;
+      max-width: 680px;
+      background: rgba(45, 30, 60, 0.75);
+      border: 2px solid rgba(255, 220, 240, 0.25);
+      border-radius: 50px 50px 40px 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 190, 220, 0.15) inset;
+      padding: 2rem 1.5rem 1.8rem;
       text-align: center;
-      transition: all 0.3s;
-      animation: cardGlow 3s infinite alternate;
+      animation: cardGlow 4s infinite alternate;
     }
 
     @keyframes cardGlow {
-      0% { box-shadow: 0 20px 40px rgba(255, 100, 150, 0.3), 0 0 0 2px rgba(255, 210, 240, 0.4) inset; }
-      100% { box-shadow: 0 30px 60px rgba(255, 150, 200, 0.6), 0 0 0 3px rgba(255, 240, 250, 0.8) inset; }
+      0% { box-shadow: 0 15px 30px rgba(255, 100, 150, 0.25), 0 0 0 1px rgba(255, 210, 240, 0.3) inset; }
+      100% { box-shadow: 0 25px 50px rgba(255, 150, 200, 0.45), 0 0 0 2px rgba(255, 240, 250, 0.5) inset; }
     }
 
-    /* 装饰彩带 (顶部) */
+    /* 装饰彩带 */
     .ribbon {
       display: flex;
       justify-content: center;
-      gap: 0.6rem;
-      margin-bottom: 1.2rem;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
       flex-wrap: wrap;
     }
 
     .ribbon span {
-      width: 18px;
-      height: 18px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
-      background: #ffb7c5;
-      box-shadow: 0 0 12px #ff99b0;
     }
 
-    .ribbon span:nth-child(1) { background: #ff9aa2; }
-    .ribbon span:nth-child(2) { background: #ffb7b2; }
-    .ribbon span:nth-child(3) { background: #ffdac1; }
-    .ribbon span:nth-child(4) { background: #e2f0cb; }
-    .ribbon span:nth-child(5) { background: #b5ead7; }
-    .ribbon span:nth-child(6) { background: #c7ceea; }
+    .ribbon span:nth-child(1) { background: #ff9aa2; box-shadow: 0 0 8px #ff9aa2; }
+    .ribbon span:nth-child(2) { background: #ffb7b2; box-shadow: 0 0 8px #ffb7b2; }
+    .ribbon span:nth-child(3) { background: #ffdac1; box-shadow: 0 0 8px #ffdac1; }
+    .ribbon span:nth-child(4) { background: #e2f0cb; box-shadow: 0 0 8px #e2f0cb; }
+    .ribbon span:nth-child(5) { background: #b5ead7; box-shadow: 0 0 8px #b5ead7; }
+    .ribbon span:nth-child(6) { background: #c7ceea; box-shadow: 0 0 8px #c7ceea; }
 
-    /* ========== 全新标题行设计 ========== */
+    /* 标题行 */
     .title-row {
       display: flex;
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 0.3rem 0.8rem;
-      margin-bottom: 0.5rem;
-      padding: 0.4rem 0;
+      gap: 0.2rem 0.6rem;
+      margin-bottom: 0.3rem;
     }
 
-    /* 主标题 "生日快乐" */
     h1 {
-      font-size: clamp(1.9rem, 8vw, 3.4rem);
+      font-size: clamp(1.8rem, 8vw, 3rem);
       font-weight: 800;
       color: #fff0f5;
-      text-shadow: 0 0 15px #ff99cc, 0 0 30px #ff66aa, 0 0 60px #ff3377;
-      letter-spacing: 3px;
-      animation: titlePulse 2s infinite alternate;
+      text-shadow: 0 0 12px #ff99cc, 0 0 25px #ff66aa;
+      letter-spacing: 2px;
+      animation: titlePulse 2.5s infinite alternate;
       line-height: 1.3;
       margin: 0;
-      display: inline-block;
-      position: relative;
-    }
-
-    /* 标题下方小装饰线 */
-    h1::after {
-      content: '';
-      position: absolute;
-      bottom: 2px;
-      left: 10%;
-      width: 80%;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #ffb8d0, #ff99bb, #ffb8d0, transparent);
-      border-radius: 3px;
-      opacity: 0.7;
     }
 
     @keyframes titlePulse {
-      from { transform: scale(1); text-shadow: 0 0 15px #ff99cc, 0 0 30px #ff66aa; }
-      to { transform: scale(1.01); text-shadow: 0 0 25px #ffaacc, 0 0 50px #ff5599, 0 0 80px #ff2277; }
+      from { text-shadow: 0 0 12px #ff99cc, 0 0 25px #ff66aa; }
+      to { text-shadow: 0 0 20px #ffaacc, 0 0 40px #ff5599; }
     }
 
-    /* 朋友的名字 "渊" — 独立设计 */
     .friend-name {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #ffe6b0, #ffc3d0, #ffb0c8);
+      display: inline-block;
+      background: linear-gradient(135deg, #ffe6b0, #ffc3d0);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      font-size: clamp(2rem, 9vw, 3.6rem);
+      font-size: clamp(2rem, 9vw, 3.4rem);
       font-weight: 800;
-      letter-spacing: 6px;
-      padding: 0 0.3rem 0.2rem;
-      line-height: 1.2;
-      position: relative;
-      filter: drop-shadow(0 0 12px rgba(255, 180, 210, 0.9));
-      animation: nameGlow 2.5s infinite alternate;
+      letter-spacing: 5px;
+      filter: drop-shadow(0 0 8px rgba(255, 180, 210, 0.8));
     }
 
-    /* 名字两侧的小装饰 */
     .friend-name::before,
     .friend-name::after {
       content: '✦';
-      font-size: 0.6em;
+      font-size: 0.5em;
       color: #ffc8dd;
       -webkit-text-fill-color: #ffc8dd;
-      margin: 0 0.15em;
-      filter: drop-shadow(0 0 8px #ffb0c8);
-      animation: sparkle 1.5s infinite alternate;
+      margin: 0 0.1em;
     }
 
-    @keyframes nameGlow {
-      from { filter: drop-shadow(0 0 8px rgba(255, 180, 210, 0.7)); }
-      to { filter: drop-shadow(0 0 20px rgba(255, 150, 190, 1)); }
-    }
-
-    @keyframes sparkle {
-      from { opacity: 0.5; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1.1); }
-    }
-
-    /* 祝福语区域 */
+    /* 祝福语 */
     .message {
       background: rgba(0, 0, 0, 0.25);
-      border-radius: 40px;
-      padding: 1.4rem 1.2rem;
-      margin: 1.6rem 0 1.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      border-radius: 30px;
+      padding: 1.2rem 1rem;
+      margin: 1.2rem 0;
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     .message p {
-      font-size: clamp(1rem, 4vw, 1.25rem);
+      font-size: clamp(0.95rem, 3.8vw, 1.15rem);
       color: #ffeff5;
       line-height: 1.9;
-      font-weight: 400;
-      letter-spacing: 0.5px;
       word-break: break-word;
     }
 
@@ -218,93 +164,84 @@
 
     @keyframes wink {
       0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(10deg); }
+      50% { transform: rotate(8deg); }
     }
 
-    /* ========== 蛋糕区域 — 增加顶部预留空间，解决火焰与文字重叠 ========== */
+    /* 蛋糕区域 */
     .cake-section {
-      margin: 2.2rem 0 1rem;   /* 增加上边距，避免与祝福语文字重叠 */
+      margin: 1.8rem 0 0.8rem;
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 0.5rem;      /* 额外预留空间给火焰 */
     }
 
     .cake {
       position: relative;
-      width: 180px;
-      height: 130px;
+      width: 170px;
+      height: 125px;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.15s;
       user-select: none;
+      -webkit-user-select: none;
     }
 
     .cake:active {
-      transform: scale(0.97);
+      transform: scale(0.96);
     }
 
-    /* 蛋糕底座 */
     .cake-base {
       position: absolute;
       bottom: 0;
       width: 100%;
-      height: 70px;
-      background: #b95c3c;
+      height: 68px;
       background: linear-gradient(180deg, #d47a5a, #a34d30);
-      border-radius: 0 0 20px 20px;
-      box-shadow: 0 10px 0 #6d2e1a;
-      border-bottom: 4px solid #54210f;
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 8px 0 #6d2e1a;
     }
 
-    /* 蛋糕中间层 */
     .cake-mid {
       position: absolute;
-      bottom: 60px;
+      bottom: 58px;
       left: 5%;
       width: 90%;
-      height: 40px;
-      background: #f7c8a0;
+      height: 38px;
       background: linear-gradient(180deg, #ffdbb5, #e6b082);
-      border-radius: 15px 15px 5px 5px;
+      border-radius: 12px 12px 4px 4px;
       border-bottom: 3px solid #b17a52;
-      box-shadow: 0 5px 0 #b17a52;
     }
 
-    /* 蛋糕顶层 (奶油) */
     .cake-top {
       position: absolute;
-      bottom: 95px;
+      bottom: 92px;
       left: 12%;
       width: 76%;
-      height: 30px;
-      background: #fff3e0;
+      height: 28px;
       background: radial-gradient(circle at 30% 20%, #fff9f0, #f7d9b8);
-      border-radius: 30px 30px 8px 8px;
-      border-bottom: 3px solid #d49c6c;
+      border-radius: 25px 25px 6px 6px;
+      border-bottom: 2px solid #d49c6c;
     }
 
-    /* 小糖粒 */
     .sprinkles {
       position: absolute;
-      bottom: 100px;
+      bottom: 96px;
       left: 20%;
       width: 60%;
-      height: 20px;
+      height: 18px;
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
     }
 
     .sprinkles span {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 2px;
-      background: #ff4d6d;
       transform: rotate(45deg);
       margin: 2px;
     }
 
+    .sprinkles span:nth-child(1) { background: #ff4d6d; }
     .sprinkles span:nth-child(2) { background: #ffb347; }
     .sprinkles span:nth-child(3) { background: #6a4c9c; }
     .sprinkles span:nth-child(4) { background: #4caf7a; }
@@ -314,209 +251,192 @@
     /* 蜡烛 */
     .candle {
       position: absolute;
-      bottom: 120px;
+      bottom: 118px;
       left: 50%;
       transform: translateX(-50%);
-      width: 14px;
-      height: 45px;
-      background: repeating-linear-gradient(45deg, #fdd, #fdd 6px, #fbb 6px, #fbb 12px);
-      border-radius: 6px 6px 3px 3px;
-      box-shadow: 0 0 8px #ffccaa;
+      width: 13px;
+      height: 42px;
+      background: repeating-linear-gradient(45deg, #fdd, #fdd 5px, #fbb 5px, #fbb 10px);
+      border-radius: 5px 5px 3px 3px;
+      box-shadow: 0 0 6px #ffccaa;
       z-index: 5;
-      transition: all 0.3s;
       cursor: pointer;
     }
 
     .candle.extinguished {
-      background: repeating-linear-gradient(45deg, #999, #999 6px, #777 6px, #777 12px);
-      box-shadow: 0 0 4px #666;
+      background: repeating-linear-gradient(45deg, #999, #999 5px, #777 5px, #777 10px);
+      box-shadow: 0 0 3px #666;
     }
 
-    /* 火焰 — 确保在蛋糕区域内，不与其他元素重叠 */
+    /* 火焰 */
     .flame {
       position: absolute;
-      top: -28px;
+      top: -26px;
       left: 50%;
       transform: translateX(-50%);
-      width: 22px;
-      height: 28px;
+      width: 20px;
+      height: 26px;
       background: radial-gradient(circle at 50% 20%, #ffdd44, #ff8800 70%, #ff4400);
       border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
-      box-shadow: 0 0 28px #ffaa00, 0 0 45px #ff6600;
-      animation: flicker 0.2s infinite alternate;
-      transition: opacity 0.2s;
+      box-shadow: 0 0 20px #ffaa00, 0 0 35px #ff6600;
+      animation: flicker 0.25s infinite alternate;
       z-index: 6;
     }
 
     .flame.hidden {
       opacity: 0;
-      pointer-events: none;
       animation: none;
     }
 
     @keyframes flicker {
       0% { transform: translateX(-50%) scale(0.9) rotate(-2deg); }
-      100% { transform: translateX(-50%) scale(1.15) rotate(2deg); }
+      100% { transform: translateX(-50%) scale(1.1) rotate(2deg); }
     }
 
-    /* 提示文字 */
     .hint {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: #ffe2f0;
       background: rgba(0, 0, 0, 0.3);
-      padding: 0.4rem 1.2rem;
+      padding: 0.35rem 1rem;
       border-radius: 50px;
-      margin-top: 0.8rem;
-      letter-spacing: 0.5px;
-      backdrop-filter: blur(4px);
+      margin-top: 0.6rem;
       display: inline-block;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: opacity 0.3s;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    /* 按钮区域 */
+    /* 按钮区 */
     .action-buttons {
       display: flex;
       justify-content: center;
-      gap: 1rem;
-      margin: 1.5rem 0 0.5rem;
+      gap: 0.8rem;
+      margin: 1.2rem 0 0.3rem;
       flex-wrap: wrap;
     }
 
     .btn {
-      background: rgba(255, 255, 255, 0.15);
-      border: 2px solid rgba(255, 220, 240, 0.7);
+      background: rgba(255, 255, 255, 0.12);
+      border: 2px solid rgba(255, 220, 240, 0.6);
       color: #fff0f5;
-      padding: 0.8rem 2rem;
+      padding: 0.7rem 1.6rem;
       border-radius: 50px;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      backdrop-filter: blur(5px);
-      transition: all 0.3s;
+      transition: all 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      flex: 0 1 auto;
+      gap: 0.4rem;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+      -webkit-tap-highlight-color: transparent;
     }
 
     .btn:hover {
-      background: rgba(255, 180, 210, 0.4);
-      border-color: #ffd0e0;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(255, 100, 150, 0.4);
+      background: rgba(255, 180, 210, 0.35);
+      transform: translateY(-2px);
     }
 
     .btn:active {
-      transform: translateY(0);
+      transform: translateY(0) scale(0.98);
     }
 
-    /* 播放音乐按钮 */
     .btn-music {
-      background: rgba(255, 200, 220, 0.25);
+      background: rgba(255, 200, 220, 0.2);
       border-color: #ffb8d0;
     }
 
     .btn-music.playing {
-      background: rgba(255, 150, 180, 0.5);
-      border-color: #ff99bb;
-      box-shadow: 0 0 20px rgba(255, 100, 150, 0.6);
-      animation: musicPulse 0.8s infinite alternate;
+      background: rgba(255, 150, 180, 0.45);
+      box-shadow: 0 0 15px rgba(255, 100, 150, 0.5);
+      animation: musicPulse 1s infinite alternate;
     }
 
     @keyframes musicPulse {
-      from { box-shadow: 0 0 15px rgba(255, 100, 150, 0.5); }
-      to { box-shadow: 0 0 30px rgba(255, 100, 150, 0.9); }
+      from { box-shadow: 0 0 10px rgba(255, 100, 150, 0.4); }
+      to { box-shadow: 0 0 22px rgba(255, 100, 150, 0.8); }
     }
 
-    /* 底部小字 */
+    /* 网易云播放器容器 */
+    .music-player-container {
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .music-player-container.visible {
+      display: block;
+    }
+
+    .music-player-container iframe {
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    }
+
     .footer-note {
       color: #ffc0d0;
-      margin-top: 1.8rem;
-      font-size: 0.9rem;
-      opacity: 0.8;
-      letter-spacing: 1px;
-      border-top: 1px solid rgba(255, 200, 220, 0.4);
-      padding-top: 1.2rem;
+      margin-top: 1.2rem;
+      font-size: 0.8rem;
+      opacity: 0.75;
+      border-top: 1px solid rgba(255, 200, 220, 0.25);
+      padding-top: 0.8rem;
     }
 
-    /* 响应式调整 */
-    @media (max-width: 520px) {
+    /* 响应式 */
+    @media (max-width: 480px) {
       .birthday-card {
-        padding: 1.8rem 1rem 1.5rem;
-        border-radius: 40px 40px 35px 35px;
+        padding: 1.5rem 1rem 1.3rem;
+        border-radius: 35px 35px 30px 30px;
       }
 
       .cake {
-        transform: scale(0.9);
+        transform: scale(0.85);
       }
 
       .btn {
         padding: 0.6rem 1.2rem;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
       }
 
       .ribbon span {
-        width: 14px;
-        height: 14px;
-      }
-
-      .title-row {
-        gap: 0.2rem 0.4rem;
-      }
-
-      h1 {
-        letter-spacing: 2px;
+        width: 11px;
+        height: 11px;
       }
 
       .friend-name {
         letter-spacing: 3px;
       }
-
-      .cake-section {
-        margin-top: 1.8rem;
-      }
     }
 
-    /* 撒花动画 */
+    /* 撒花 */
     .confetti {
       position: fixed;
       top: -20px;
-      width: 10px;
-      height: 10px;
-      background: #ff99cc;
+      width: 8px;
+      height: 8px;
       opacity: 0.9;
       z-index: 999;
       pointer-events: none;
       animation: confettiFall 3s linear forwards;
+      will-change: transform;
     }
 
     @keyframes confettiFall {
       0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+      100% { transform: translateY(100vh) rotate(540deg); opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <!-- 飘浮爱心背景 -->
   <div class="floating-hearts" id="heartContainer"></div>
 
-  <!-- 主卡片 -->
   <div class="birthday-card">
-    <!-- 彩色圆点装饰 -->
     <div class="ribbon">
       <span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
 
-    <!-- 标题行 — 生日快乐 + 渊 合并同行（优化版） -->
     <div class="title-row">
       <h1>生日快乐</h1>
       <span class="friend-name">渊</span>
     </div>
 
-    <!-- 祝福语 -->
     <div class="message">
       <p>
         <i>🎉</i> 愿你的每一天都充满阳光与欢笑，<br>
@@ -527,7 +447,6 @@
       </p>
     </div>
 
-    <!-- 蛋糕 + 吹蜡烛互动区 -->
     <div class="cake-section">
       <div class="cake" id="cake" title="点击吹蜡烛！">
         <div class="cake-base"></div>
@@ -540,16 +459,28 @@
           <div class="flame" id="flame"></div>
         </div>
       </div>
-      <div class="hint" id="hint">👆 点击蛋糕或蜡烛吹灭它 👆</div>
+      <div class="hint" id="hint">👆 点击蛋糕或蜡烛吹灭它</div>
     </div>
 
-    <!-- 按钮区 -->
     <div class="action-buttons">
       <button class="btn" id="celebrateBtn">🎉 撒花庆祝</button>
-      <button class="btn btn-music" id="musicBtn">🎵 播放生日快乐歌</button>
+      <button class="btn btn-music" id="musicBtn">🎵 播放生日歌</button>
     </div>
 
-    <!-- 底部小字 -->
+    <!-- 网易云音乐播放器 -->
+    <div class="music-player-container" id="musicPlayer">
+      <iframe 
+        frameborder="no" 
+        border="0" 
+        marginwidth="0" 
+        marginheight="0" 
+        width="100%" 
+        height="120" 
+        src="//music.163.com/outchain/player?type=2&id=1963443271&auto=0&height=90"
+        allow="autoplay">
+      </iframe>
+    </div>
+
     <div class="footer-note">
       ⭐ 永远开心，永远闪耀 ⭐
     </div>
@@ -557,10 +488,10 @@
 
   <script>
     (function() {
-      // ---------- 1. 生成飘浮爱心 / 星星 ----------
+      // 移动端精简爱心数量
       const heartContainer = document.getElementById('heartContainer');
-      const heartSymbols = ['❤️', '💖', '💗', '💓', '💕', '✨', '⭐', '🌟', '🎈', '🎉'];
-      const HEART_COUNT = 28;
+      const heartSymbols = ['❤️', '💖', '✨', '⭐', '🎈'];
+      const HEART_COUNT = 16;
 
       for (let i = 0; i < HEART_COUNT; i++) {
         const heart = document.createElement('div');
@@ -568,32 +499,30 @@
         heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
         heart.style.left = Math.random() * 100 + '%';
         heart.style.top = Math.random() * 100 + '%';
-        heart.style.fontSize = (1.2 + Math.random() * 2.2) + 'rem';
-        heart.style.animationDelay = Math.random() * 8 + 's';
-        heart.style.animationDuration = (6 + Math.random() * 6) + 's';
-        heart.style.opacity = 0.4 + Math.random() * 0.5;
+        heart.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+        heart.style.animationDelay = Math.random() * 10 + 's';
+        heart.style.animationDuration = (8 + Math.random() * 6) + 's';
         heartContainer.appendChild(heart);
       }
 
-      // ---------- 2. 元素引用 ----------
       const candle = document.getElementById('candle');
       const flame = document.getElementById('flame');
       const cake = document.getElementById('cake');
       const hint = document.getElementById('hint');
       const celebrateBtn = document.getElementById('celebrateBtn');
       const musicBtn = document.getElementById('musicBtn');
+      const musicPlayer = document.getElementById('musicPlayer');
 
       let isCandleLit = true;
+      let isPlayerVisible = false;
 
-      // ---------- 3. 吹蜡烛功能 ----------
       function blowOutCandle() {
         if (!isCandleLit) return;
         flame.classList.add('hidden');
         candle.classList.add('extinguished');
         isCandleLit = false;
-        hint.textContent = '🎂 蜡烛吹灭啦！愿望一定会实现 ✨ (双击蛋糕可重点蜡烛)';
-        hint.style.opacity = '1';
-        createConfetti(20);
+        hint.textContent = '🎂 蜡烛吹灭啦！愿望一定会实现 ✨';
+        createConfetti(15);
       }
 
       cake.addEventListener('click', blowOutCandle);
@@ -602,9 +531,8 @@
         blowOutCandle();
       });
 
-      // ---------- 4. 撒花效果 ----------
-      function createConfetti(count = 30) {
-        const colors = ['#ff9aa2', '#ffb7b2', '#ffdac1', '#e2f0cb', '#b5ead7', '#c7ceea', '#ff99cc', '#ffcc00', '#ff6f91'];
+      function createConfetti(count) {
+        const colors = ['#ff9aa2', '#ffb7b2', '#ffdac1', '#e2f0cb', '#b5ead7', '#c7ceea', '#ff99cc', '#ffcc00'];
         const container = document.body;
 
         for (let i = 0; i < count; i++) {
@@ -613,126 +541,46 @@
           const color = colors[Math.floor(Math.random() * colors.length)];
           confetti.style.backgroundColor = color;
           confetti.style.left = Math.random() * 100 + '%';
-          confetti.style.width = (6 + Math.random() * 8) + 'px';
-          confetti.style.height = (6 + Math.random() * 8) + 'px';
+          confetti.style.width = (5 + Math.random() * 6) + 'px';
+          confetti.style.height = (5 + Math.random() * 6) + 'px';
           confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-          confetti.style.animationDuration = (1.8 + Math.random() * 2.5) + 's';
+          confetti.style.animationDuration = (2 + Math.random() * 2) + 's';
           confetti.style.animationDelay = Math.random() * 0.3 + 's';
-          confetti.style.opacity = 0.8 + Math.random() * 0.2;
-          if (Math.random() > 0.7) {
-            confetti.style.width = '4px';
-            confetti.style.height = '14px';
-          }
           container.appendChild(confetti);
-          setTimeout(() => confetti.remove(), 3000);
+          setTimeout(() => confetti.remove(), 3500);
         }
       }
 
-      // ---------- 5. 撒花庆祝按钮 ----------
       celebrateBtn.addEventListener('click', function() {
-        createConfetti(50);
+        createConfetti(40);
         if (isCandleLit) {
-          hint.textContent = '🎈 点击蛋糕吹蜡烛，会有小惊喜哦 🎈';
+          hint.textContent = '🎈 点击蛋糕吹蜡烛吧';
         } else {
           hint.textContent = '🎊 生日快乐！！！🎊';
         }
-        celebrateBtn.style.transform = 'scale(1.1)';
-        setTimeout(() => celebrateBtn.style.transform = 'scale(1)', 200);
+        celebrateBtn.style.transform = 'scale(1.08)';
+        setTimeout(() => celebrateBtn.style.transform = 'scale(1)', 150);
       });
 
-      // ---------- 6. 播放生日快乐歌 ----------
-      let audioCtx = null;
-      let isPlaying = false;
-      let stopTimeout = null;
-      let noteTimeouts = [];
-
-      function stopMusic() {
-        noteTimeouts.forEach(t => clearTimeout(t));
-        noteTimeouts = [];
-        if (stopTimeout) {
-          clearTimeout(stopTimeout);
-          stopTimeout = null;
-        }
-        if (audioCtx) {
-          audioCtx.close().catch(() => {});
-          audioCtx = null;
-        }
-        isPlaying = false;
-        musicBtn.classList.remove('playing');
-        musicBtn.textContent = '🎵 播放生日快乐歌';
-      }
-
-      function playNote(frequency, startTime, duration, gainNode) {
-        const osc = audioCtx.createOscillator();
-        osc.type = 'sine';
-        osc.frequency.value = frequency;
-        osc.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        osc.start(startTime);
-        osc.stop(startTime + duration);
-      }
-
-      const melody = [
-        { note: 392.00, dur: 0.75 }, { note: 392.00, dur: 0.25 },
-        { note: 440.00, dur: 1.0 }, { note: 392.00, dur: 1.0 },
-        { note: 523.25, dur: 1.0 }, { note: 493.88, dur: 2.0 },
-        { note: 392.00, dur: 0.75 }, { note: 392.00, dur: 0.25 },
-        { note: 440.00, dur: 1.0 }, { note: 392.00, dur: 1.0 },
-        { note: 587.33, dur: 1.0 }, { note: 523.25, dur: 2.0 },
-        { note: 392.00, dur: 0.75 }, { note: 392.00, dur: 0.25 },
-        { note: 783.99, dur: 1.0 }, { note: 659.25, dur: 1.0 },
-        { note: 523.25, dur: 1.0 }, { note: 493.88, dur: 1.0 },
-        { note: 440.00, dur: 1.0 },
-        { note: 698.46, dur: 0.75 }, { note: 698.46, dur: 0.25 },
-        { note: 659.25, dur: 1.0 }, { note: 523.25, dur: 1.0 },
-        { note: 587.33, dur: 1.0 }, { note: 523.25, dur: 2.0 }
-      ];
-
-      function playHappyBirthday() {
-        stopMusic();
-
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const gainNode = audioCtx.createGain();
-        gainNode.gain.value = 0.25;
-        gainNode.connect(audioCtx.destination);
-
-        const startTime = audioCtx.currentTime + 0.1;
-        let currentTime = startTime;
-        const totalDuration = melody.reduce((sum, item) => sum + item.dur, 0);
-
-        melody.forEach((item) => {
-          playNote(item.note, currentTime, item.dur * 0.9, gainNode);
-          currentTime += item.dur;
-        });
-
-        isPlaying = true;
-        musicBtn.classList.add('playing');
-        musicBtn.textContent = '🎶 播放中...';
-
-        stopTimeout = setTimeout(() => {
-          if (audioCtx) {
-            audioCtx.close().catch(() => {});
-            audioCtx = null;
-          }
-          isPlaying = false;
-          musicBtn.classList.remove('playing');
-          musicBtn.textContent = '🎵 播放生日快乐歌';
-        }, (totalDuration + 0.5) * 1000);
-
-        hint.textContent = '🎵 生日快乐歌为你奏响 🎵';
-      }
-
+      // 音乐按钮 — 切换网易云播放器显示
       musicBtn.addEventListener('click', function() {
-        if (isPlaying) {
-          stopMusic();
-          hint.textContent = '🎵 音乐已停止';
+        if (isPlayerVisible) {
+          musicPlayer.classList.remove('visible');
+          isPlayerVisible = false;
+          musicBtn.classList.remove('playing');
+          musicBtn.textContent = '🎵 播放生日歌';
+          hint.textContent = '👆 点击蛋糕或蜡烛吹灭它';
         } else {
-          playHappyBirthday();
-          createConfetti(15);
+          musicPlayer.classList.add('visible');
+          isPlayerVisible = true;
+          musicBtn.classList.add('playing');
+          musicBtn.textContent = '🎶 正在播放...';
+          hint.textContent = '🎵 点击播放器上的播放键开始';
+          createConfetti(10);
         }
       });
 
-      // ---------- 7. 双击蛋糕重置蜡烛 ----------
+      // 双击重置蜡烛
       cake.addEventListener('dblclick', function(e) {
         e.stopPropagation();
         if (!isCandleLit) {
@@ -740,12 +588,6 @@
           candle.classList.remove('extinguished');
           isCandleLit = true;
           hint.textContent = '🕯️ 蜡烛重新点燃啦，再吹一次吧~';
-        }
-      });
-
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden && isPlaying) {
-          stopMusic();
         }
       });
     })();
